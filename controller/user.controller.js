@@ -1,6 +1,11 @@
 //require db vao day, goi model
 var User = require('../models/user.model');
-
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+ // khai bao authen
+const session = require('express-session')
+const Passport = require('passport')
+const LocalStrategy = require('passport-local').Strategy;
 
 module.exports.dangky = function(req,res){
 	res.render('users/dangky',{
@@ -9,26 +14,30 @@ module.exports.dangky = function(req,res){
 }
 
 module.exports.dangnhap = function(req,res){
-	res.render('users/dangnhap',{
-	
+	res.render('users/dangnhap',{	
 	});
 }
 
-module.exports.Home = async function(req,res){
-	var users = await User.find();
-	res.send({
-		users:users
-	})
+module.exports.Home=function(req,res){
+	res.render('users/dangnhap',{	
+	});
 }
 
 module.exports.CreateUser = async function(req,res){
+	 // Lấy dữ liệu ở ở post
+	 var name  = req.body.name;
+	 var phone = req.body.phone;
+	 var email = req.body.email;
+	 var password = req.body.password;
 
-	// Lấy dữ liệu ở ở post
+	// has password 
+	var hashPassword  = bcrypt.hashSync(password, saltRounds);
+	console.log(hashPassword);
 	var user1 = await User({
-	 name: req.body.name,
-	 phone:req.body.phone,
-	 email: req.body.email, 
-	 password: req.body.password 
+	 name: name,
+	 phone: phone,
+	 email: email, 
+	 password: hashPassword
 	});
 
 	// save dữ liệu 
@@ -41,5 +50,5 @@ module.exports.CreateUser = async function(req,res){
 	    });
     });
 
-
 }
+

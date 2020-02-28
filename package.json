@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
+    "start": "nodemon --inspect index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,10 +18,14 @@
   "homepage": "https://github.com/aloha1604/NODEJS-WEB-SERVER-USING-EXPRESS-2020#readme",
   "description": "",
   "dependencies": {
+    "bcrypt": "^4.0.0",
     "body-parser": "^1.19.0",
     "ejs": "^3.0.1",
     "express": "^4.17.1",
-    "mongoose": "^5.9.2"
+    "express-session": "^1.17.0",
+    "mongoose": "^5.9.2",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.2"
