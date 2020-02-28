@@ -1,10 +1,17 @@
-const express = require('express')
-const app = express()
-const port = 8080
+const express = require('express');
+const app = express();
+const port = 8080;
+
+
+app.use(express.json()) // for parsing application/json
+app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+
 
 var userRoute = require('./routes/user.route');
 app.set('view engine', 'ejs');
 app.set('views','./views');
+
+
 
 var mongoose = require('mongoose');
 // mongoose.connect(process.env.MONGO_URL);
